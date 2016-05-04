@@ -1,0 +1,27 @@
+{
+  "name": "vue-v",
+  "version": "0.0.1",
+  "description": "a vue form validator",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wszgxa/vue-v.git"
+  },
+  "keywords": [
+    "vue",
+    "form",
+    "validator"
+  ],
+  "author": "hiluluke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wszgxa/vue-v/issues"
+  },
+  "homepage": "https://github.com/wszgxa/vue-v#readme",
+  "devDependencies": {
+    "webpack": "^1.13.0"
+  }
+}
