@@ -4,7 +4,7 @@
   "description": "a vue form validator",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -16,15 +16,13 @@
     "validator"
   ],
   "author": "hiluluke",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/wszgxa/vue-v/issues"
   },
   "homepage": "https://github.com/wszgxa/vue-v#readme",
   "devDependencies": {
-    "webpack": "^1.13.0"
-  },
-  "dependencies": {
+    "webpack": "^1.13.0",
     "vue": "^1.0.21"
   }
 }
