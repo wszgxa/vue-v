@@ -23,5 +23,8 @@
   "homepage": "https://github.com/wszgxa/vue-v#readme",
   "devDependencies": {
     "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "vue": "^1.0.21"
   }
 }
