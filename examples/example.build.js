@@ -47,8 +47,28 @@
 	var Vue = __webpack_require__(1),
 	    vueV = __webpack_require__(3);
 
-	Vue.use(vueV);
+	Vue.use(vueV,{
+	  nihao: function() {
+	    return true;
+	  }
+	});
 
+	var el = new Vue({
+	  el:"#demo",
+	  template: '#template',
+	  replace: false,
+	  data: {
+	    formData: {},
+	    model: {
+	      "password": "123"
+	    }
+	  },
+	  methods: {
+	    password: function(){
+	      console.log('密码错误！');
+	    }
+	  }
+	});
 
 
 /***/ },
@@ -10090,16 +10110,38 @@
 	 */
 
 	vueV.install = function(Vue, options) {
-	  console.log('heh');
 	  var list = __webpack_require__(4),
 	      _ = __webpack_require__(5);
+	      _.extend(list, options);
+	  var list_key = _.getKeys(list);
+	  Vue.directive('ver', {
+	    prams: ["maxLength","minLength"],
+	    bind: function() {
+	      // if no v-model throw error
+	      if (this.el.getAttribute('v-model') == undefined) {
+	        throw new Error('input without v-modle');
+	      }
+	    },
+	    update: function(report) {
+	      window.hehe = this.modifiers;
+	      var vm = this.vm,
+	          el = this.el,
+	          vModel = this.el.getAttribute('v-model'),
+	          va_list = _.getKeys(this.modifiers);
+	      vm.$watch(vModel, function(){console.log('changed');})
 
+	    },
+	    unbind: function() {
+
+	    }
+	  });
 	};
 
-	/*
-	 * https://github.com/vuejs/vue-touch/blob/master/vue-touch.js
-	 */
 
+
+	/*
+	 * from https://github.com/vuejs/vue-touch/blob/master/vue-touch.js
+	 */
 	if (true) {
 	  module.exports = vueV;
 	} else if (typeof define == "function" && define.amd) {
@@ -10126,25 +10168,15 @@
 	  chinese: function(str) {
 	    return /^[\u4e00-\u9fa5]+$/i.test(_.trim(str));
 	  },
-	  bankNumber: function(str){
+	  bank: function(str){
 	    return /\d{16,19}/.test(str);
 	  },
 	  password: function(str){
 	    return /^([0-9a-zA-Z]){6,20}$/.test(str);
 	  },
-	  passwordOther: function(str){
-	    return /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/.test(str);
+	  email: function(str){
+	      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
 	  },
-	  isEmail: function(email){
-	      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(email));
-	  },
-	  /**
-	   * [strLen description]
-	   * @param  {[String]}  str [需要比较的字符串]
-	   * @param  {[Number]}  min [最小长度]
-	   * @param  {[Number]}  max [最大长度]
-	   * @return {[boolean]}      [是否符合要求]
-	   */
 	  strLen: function(str, min, max) {   
 	    var len;
 	    if(str.length == undefined){
@@ -10166,7 +10198,7 @@
 	   * @param  String telarea 用户的固定电话的区号
 	   * @return boolean           格式正确返回true,否则返回false
 	   */
-	  checkTelarea: function(telarea) {
+	  telarea: function(telarea) {
 	    return /^0[0-9]{2,3}$/.test(telarea);
 	  },
 	  /**
@@ -10174,7 +10206,7 @@
 	   * @param  int telnum 用户的固定电话的号码
 	   * @return boolean           格式正确返回true,否则返回false
 	   */
-	  checkTelnum: function(telnum) {
+	  telnum: function(telnum) {
 	    return  /^[2-9][0-9]{6,7}$/.test(telnum);
 	  },
 	  /**
@@ -10215,7 +10247,32 @@
 	_.trim = function(str) {
 	  // 类数组对象同样适用
 	  return str == null ? "" : String.prototype.trim.call(str);
-	}
+	};
+	_.getKeys = function(obj) {
+	  var tag = [];
+	  for(var p in obj) {
+	    // 判断是否是实例属性
+	    if (obj.hasOwnProperty) {
+	      obj.hasOwnProperty(p) && tag.push(p);
+	    } else {
+	      tag.push(p);
+	    }
+	  }
+	  return tag;
+	};
+	_.extend = function (target, source, deep) {
+	    for (key in source)
+	      if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+	        if (isPlainObject(source[key]) && !isPlainObject(target[key])){
+	          target[key] = {};
+	        }
+	        if (isArray(source[key]) && !isArray(target[key])){
+	          target[key] = [];
+	        }
+	        _.extend(target[key], source[key], deep);
+	      }
+	      else if (source[key] !== undefined) target[key] = source[key]
+	  }
 
 /***/ }
 /******/ ]);

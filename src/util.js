@@ -11,4 +11,29 @@ var _ = exports;
 _.trim = function(str) {
   // 类数组对象同样适用
   return str == null ? "" : String.prototype.trim.call(str);
-}
+};
+_.getKeys = function(obj) {
+  var tag = [];
+  for(var p in obj) {
+    // 判断是否是实例属性
+    if (obj.hasOwnProperty) {
+      obj.hasOwnProperty(p) && tag.push(p);
+    } else {
+      tag.push(p);
+    }
+  }
+  return tag;
+};
+_.extend = function (target, source, deep) {
+    for (key in source)
+      if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+        if (isPlainObject(source[key]) && !isPlainObject(target[key])){
+          target[key] = {};
+        }
+        if (isArray(source[key]) && !isArray(target[key])){
+          target[key] = [];
+        }
+        _.extend(target[key], source[key], deep);
+      }
+      else if (source[key] !== undefined) target[key] = source[key]
+  }
