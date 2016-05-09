@@ -10,25 +10,15 @@ var list = {
   chinese: function(str) {
     return /^[\u4e00-\u9fa5]+$/i.test(_.trim(str));
   },
-  bankNumber: function(str){
+  bank: function(str){
     return /\d{16,19}/.test(str);
   },
   password: function(str){
     return /^([0-9a-zA-Z]){6,20}$/.test(str);
   },
-  passwordOther: function(str){
-    return /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/.test(str);
+  email: function(str){
+      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
   },
-  isEmail: function(email){
-      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(email));
-  },
-  /**
-   * [strLen description]
-   * @param  {[String]}  str [需要比较的字符串]
-   * @param  {[Number]}  min [最小长度]
-   * @param  {[Number]}  max [最大长度]
-   * @return {[boolean]}      [是否符合要求]
-   */
   strLen: function(str, min, max) {   
     var len;
     if(str.length == undefined){
@@ -50,7 +40,7 @@ var list = {
    * @param  String telarea 用户的固定电话的区号
    * @return boolean           格式正确返回true,否则返回false
    */
-  checkTelarea: function(telarea) {
+  telarea: function(telarea) {
     return /^0[0-9]{2,3}$/.test(telarea);
   },
   /**
@@ -58,7 +48,7 @@ var list = {
    * @param  int telnum 用户的固定电话的号码
    * @return boolean           格式正确返回true,否则返回false
    */
-  checkTelnum: function(telnum) {
+  telnum: function(telnum) {
     return  /^[2-9][0-9]{6,7}$/.test(telnum);
   },
   /**
