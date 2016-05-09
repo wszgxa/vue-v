@@ -1,6 +1,5 @@
-var webpack = require("webpack"),
-    version = require("./package.json").version;
-
+var webpack = require("webpack");
+var version = require("../package.json").version;
 var banner =
     "/**\n" +
     " * vue-v v" + version + "\n" +

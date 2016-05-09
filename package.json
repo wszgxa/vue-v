@@ -4,7 +4,8 @@
   "description": "a vue form validator",
   "main": "src/index.js",
   "scripts": {
-    "dev": "webpack --progress --colors --watch"
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --watch examples/example.js examples/example.build.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,8 @@
   },
   "homepage": "https://github.com/wszgxa/vue-v#readme",
   "devDependencies": {
-    "webpack": "^1.13.0",
-    "vue": "^1.0.21"
+    "uglify-js": "^2.6.2",
+    "vue": "^1.0.21",
+    "webpack": "^1.13.0"
   }
 }
