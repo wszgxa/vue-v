@@ -4,7 +4,7 @@
   "description": "a vue form validator",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config dist/webpack.build.config.js",
     "dev": "webpack --watch examples/example.js examples/example.build.js"
   },
   "repository": {

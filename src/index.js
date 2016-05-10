@@ -10,7 +10,6 @@ vueV.install = function(Vue, options) {
   var list = require('./validate-list.js'),
       _ = require('./util.js');
       _.extend(list, options);
-  var list_key = _.getKeys(list);
 
   Vue.directive('ver', {
     prams: ["maxLength","minLength"],
@@ -23,7 +22,6 @@ vueV.install = function(Vue, options) {
     update: function(report) {
       var vm = this.vm,
           el = this.el,
-          self = this,
           vModel = this.el.getAttribute('v-model'),
           name = this.el.getAttribute('name'),
           va_list = _.getKeys(this.modifiers);
@@ -51,7 +49,7 @@ vueV.install = function(Vue, options) {
         var data = vm.formData[name],
             tag = [];
         for(item in data) {
-          if(data[item] == false ) {
+          if(!data[item]) {
             tag.push(item);
           }
         }
@@ -60,12 +58,9 @@ vueV.install = function(Vue, options) {
 
     },
     unbind: function() {
-
     }
   });
 };
-
-
 
 /*
  * from https://github.com/vuejs/vue-touch/blob/master/vue-touch.js
@@ -73,9 +68,10 @@ vueV.install = function(Vue, options) {
 if (typeof exports == "object") {
   module.exports = vueV;
 } else if (typeof define == "function" && define.amd) {
-  define([], function () { return vuev });
+  define([], function () { return vueV });
 } else if (window.Vue) {
   window.vueForm = vueV;
   Vue.use(vueV);
 }
+
 })()
