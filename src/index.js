@@ -11,6 +11,7 @@ vueV.install = function(Vue, options) {
       _ = require('./util.js');
       _.extend(list, options);
   var list_key = _.getKeys(list);
+
   Vue.directive('ver', {
     prams: ["maxLength","minLength"],
     bind: function() {
@@ -23,9 +24,20 @@ vueV.install = function(Vue, options) {
       window.hehe = this.modifiers;
       var vm = this.vm,
           el = this.el,
+          self = this,
           vModel = this.el.getAttribute('v-model'),
+          name = this.el.getAttribute('name'),
           va_list = _.getKeys(this.modifiers);
-      vm.$watch(vModel, function(){console.log('changed');})
+      if (name == undefined) {
+        throw new Error('input without name');
+      }
+      if (vm.model[name] == undefined) {
+        vm.$set('model.'+name, this.el.value);
+      }
+      var setFormData = function(){
+        console.log(this);
+      }
+      vm.$watch(vModel, setFormData());
 
     },
     unbind: function() {

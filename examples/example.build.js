@@ -60,7 +60,6 @@
 	  data: {
 	    formData: {},
 	    model: {
-	      "password": "123"
 	    }
 	  },
 	  methods: {
@@ -10114,6 +10113,7 @@
 	      _ = __webpack_require__(5);
 	      _.extend(list, options);
 	  var list_key = _.getKeys(list);
+
 	  Vue.directive('ver', {
 	    prams: ["maxLength","minLength"],
 	    bind: function() {
@@ -10126,9 +10126,20 @@
 	      window.hehe = this.modifiers;
 	      var vm = this.vm,
 	          el = this.el,
+	          self = this,
 	          vModel = this.el.getAttribute('v-model'),
+	          name = this.el.getAttribute('name'),
 	          va_list = _.getKeys(this.modifiers);
-	      vm.$watch(vModel, function(){console.log('changed');})
+	      if (name == undefined) {
+	        throw new Error('input without name');
+	      }
+	      if (vm.model[name] == undefined) {
+	        vm.$set('model.'+name, this.el.value);
+	      }
+	      var setFormData = function(){
+	        console.log(this);
+	      }
+	      vm.$watch(vModel, setFormData());
 
 	    },
 	    unbind: function() {
@@ -10224,6 +10235,9 @@
 	   */
 	  userName: function(userName) {
 	    return /^[\u4e00-\u9fa5]{1,10}[·.]{0,1}[\u4e00-\u9fa5]{1,10}$/.test(userName);
+	  },
+	  required: function(str) {
+	    return !!str;
 	  }
 	};
 

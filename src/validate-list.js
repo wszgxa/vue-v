@@ -66,6 +66,9 @@ var list = {
    */
   userName: function(userName) {
     return /^[\u4e00-\u9fa5]{1,10}[·.]{0,1}[\u4e00-\u9fa5]{1,10}$/.test(userName);
+  },
+  required: function(str) {
+    return !!str;
   }
 };
 

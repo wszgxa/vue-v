@@ -14,7 +14,6 @@ var el = new Vue({
   data: {
     formData: {},
     model: {
-      "password": "123"
     }
   },
   methods: {
