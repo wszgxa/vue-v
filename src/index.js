@@ -21,7 +21,6 @@ vueV.install = function(Vue, options) {
       }
     },
     update: function(report) {
-      window.hehe = this.modifiers;
       var vm = this.vm,
           el = this.el,
           self = this,
@@ -31,13 +30,33 @@ vueV.install = function(Vue, options) {
       if (name == undefined) {
         throw new Error('input without name');
       }
+      // 如果data没有设置，初始化
       if (vm.model[name] == undefined) {
         vm.$set('model.'+name, this.el.value);
       }
-      var setFormData = function(){
-        console.log(this);
-      }
-      vm.$watch(vModel, setFormData());
+      // 设置formdata验证数据
+      var setState = function(val){
+        var tag = {};
+        va_list.forEach(function(key){
+          tag[key] = list[key](val);
+        });
+        vm.$set('formData.'+name,tag);
+      };
+      // 初始化
+      setState('');
+      // 监听
+      vm.$watch(vModel, setState);
+
+      Vue.util.on(el, 'blur', function(){
+        var data = vm.formData[name],
+            tag = [];
+        for(item in data) {
+          if(data[item] == false ) {
+            tag.push(item);
+          }
+        }
+        report(tag);
+      });
 
     },
     unbind: function() {

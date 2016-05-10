@@ -17,8 +17,8 @@ var el = new Vue({
     }
   },
   methods: {
-    password: function(){
-      console.log('密码错误！');
+    password: function(tag){
+      console.log(tag);
     }
   }
 });

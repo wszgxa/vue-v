@@ -63,8 +63,8 @@
 	    }
 	  },
 	  methods: {
-	    password: function(){
-	      console.log('密码错误！');
+	    password: function(tag){
+	      console.log(tag);
 	    }
 	  }
 	});
@@ -10123,7 +10123,6 @@
 	      }
 	    },
 	    update: function(report) {
-	      window.hehe = this.modifiers;
 	      var vm = this.vm,
 	          el = this.el,
 	          self = this,
@@ -10133,13 +10132,33 @@
 	      if (name == undefined) {
 	        throw new Error('input without name');
 	      }
+	      // 如果data没有设置，初始化
 	      if (vm.model[name] == undefined) {
 	        vm.$set('model.'+name, this.el.value);
 	      }
-	      var setFormData = function(){
-	        console.log(this);
-	      }
-	      vm.$watch(vModel, setFormData());
+	      // 设置formdata验证数据
+	      var setState = function(val){
+	        var tag = {};
+	        va_list.forEach(function(key){
+	          tag[key] = list[key](val);
+	        });
+	        vm.$set('formData.'+name,tag);
+	      };
+	      // 初始化
+	      setState('');
+	      // 监听
+	      vm.$watch(vModel, setState);
+
+	      Vue.util.on(el, 'blur', function(){
+	        var data = vm.formData[name],
+	            tag = [];
+	        for(item in data) {
+	          if(data[item] == false ) {
+	            tag.push(item);
+	          }
+	        }
+	        report(tag);
+	      });
 
 	    },
 	    unbind: function() {
@@ -10201,7 +10220,7 @@
 	  qq: function(str) {
 	    return /^[1-9][0-9]{2,9}$/.test(str);
 	  },
-	  cellPhone:function(cellPhone){
+	  cellphone:function(cellPhone){
 	    return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
 	  },
 	  /**
@@ -10225,7 +10244,7 @@
 	   * @param  string id 身份证号
 	   * @return boolean    格式正确返回true,否则返回false
 	   */
-	  idCard: function(id) {
+	  idcard: function(id) {
 	    return /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/.test(id);
 	  },
 	  /**
@@ -10233,7 +10252,7 @@
 	   * @param  string userName 用户名
 	   * @return boolean 格式正确返回true,否则返回false
 	   */
-	  userName: function(userName) {
+	  username: function(userName) {
 	    return /^[\u4e00-\u9fa5]{1,10}[·.]{0,1}[\u4e00-\u9fa5]{1,10}$/.test(userName);
 	  },
 	  required: function(str) {

@@ -32,7 +32,7 @@ var list = {
   qq: function(str) {
     return /^[1-9][0-9]{2,9}$/.test(str);
   },
-  cellPhone:function(cellPhone){
+  cellphone:function(cellPhone){
     return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
   },
   /**
@@ -56,7 +56,7 @@ var list = {
    * @param  string id 身份证号
    * @return boolean    格式正确返回true,否则返回false
    */
-  idCard: function(id) {
+  idcard: function(id) {
     return /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/.test(id);
   },
   /**
@@ -64,7 +64,7 @@ var list = {
    * @param  string userName 用户名
    * @return boolean 格式正确返回true,否则返回false
    */
-  userName: function(userName) {
+  username: function(userName) {
     return /^[\u4e00-\u9fa5]{1,10}[·.]{0,1}[\u4e00-\u9fa5]{1,10}$/.test(userName);
   },
   required: function(str) {
