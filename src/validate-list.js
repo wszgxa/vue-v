@@ -27,6 +27,10 @@ var list = {
     } else {
       len = str.length;
     }
+    if (min == undefined || max == undefined) {
+      throw new Error('need min and max!');
+      return false;
+    }
     return (min<=len)&&(len<=max);
   },
   qq: function(str) {

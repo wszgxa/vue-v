@@ -10114,7 +10114,7 @@
 	      _.extend(list, options);
 
 	  Vue.directive('ver', {
-	    prams: ["maxLength","minLength"],
+	    params: ["maxLength","minLength"],
 	    bind: function() {
 	      // if no v-model throw error
 	      if (this.el.getAttribute('v-model') == undefined) {
@@ -10124,6 +10124,7 @@
 	    update: function(report) {
 	      var vm = this.vm,
 	          el = this.el,
+	          self = this,
 	          vModel = this.el.getAttribute('v-model'),
 	          name = this.el.getAttribute('name'),
 	          va_list = _.getKeys(this.modifiers);
@@ -10138,7 +10139,7 @@
 	      var setState = function(val){
 	        var tag = {};
 	        va_list.forEach(function(key){
-	          tag[key] = list[key](val);
+	          tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
 	        });
 	        vm.$set('formData.'+name,tag);
 	      };
@@ -10210,6 +10211,10 @@
 	      return false;
 	    } else {
 	      len = str.length;
+	    }
+	    if (min == undefined || max == undefined) {
+	      throw new Error('need min and max!');
+	      return false;
 	    }
 	    return (min<=len)&&(len<=max);
 	  },

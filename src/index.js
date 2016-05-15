@@ -12,7 +12,7 @@ vueV.install = function(Vue, options) {
       _.extend(list, options);
 
   Vue.directive('ver', {
-    prams: ["maxLength","minLength"],
+    params: ["maxLength","minLength"],
     bind: function() {
       // if no v-model throw error
       if (this.el.getAttribute('v-model') == undefined) {
@@ -22,6 +22,7 @@ vueV.install = function(Vue, options) {
     update: function(report) {
       var vm = this.vm,
           el = this.el,
+          self = this,
           vModel = this.el.getAttribute('v-model'),
           name = this.el.getAttribute('name'),
           va_list = _.getKeys(this.modifiers);
@@ -36,7 +37,7 @@ vueV.install = function(Vue, options) {
       var setState = function(val){
         var tag = {};
         va_list.forEach(function(key){
-          tag[key] = list[key](val);
+          tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
         });
         vm.$set('formData.'+name,tag);
       };
