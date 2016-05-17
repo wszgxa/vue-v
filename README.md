@@ -18,7 +18,15 @@ Vue.use(require('vue-v'));
 
 ### demo
 
-你可以 `git clone git@github.com:wszgxa/vue-v.git`
+你可以 
+```
+git clone git@github.com:wszgxa/vue-v.git
+cd vue-v
+npm install
+npm run dev
+```
+然后打开exampels/index.html
+
 然后 打开examples 下面的index.html
 
 ### 使用方法
