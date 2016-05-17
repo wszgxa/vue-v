@@ -12,6 +12,9 @@ _.trim = function(str) {
   // 类数组对象同样适用
   return str == null ? "" : String.prototype.trim.call(str);
 };
+_.isObject = function (obj) {
+    return obj !== null && typeof obj === 'object';
+};
 _.isPlainObject = function (obj) {
     return _.isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
 };
