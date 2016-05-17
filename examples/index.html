@@ -7,9 +7,20 @@
 <body>
 <div id="demo"></div>
   <script type="x-template" id="template">
-    <h3/> username <h3>
-    <input name="password" v-model="model.password" v-ver.userName.password.required='password' max-length="13">
-    <input name="word" v-model="model.data" v-ver.username.password.required='password'>
+    <h3>required</h3>
+    <input name="required" v-model="model.required" v-ver.required="handle">
+
+    <h3>password</h3>
+    <input name="password" v-model="model.password" v-ver.password="handle">
+
+    <h3>组合使用</h3>
+    <input name="gropu" v-model="model.group" v-ver.password.required="alert">
+    <h3>字符长度</h3>
+    <input name="str" v-model="model.str" v-ver.length="strLen" min-length="12" max-length="22">
+    <h3>添加的验证方法</h3>
+    <input name="test" v-model="model.test" v-ver.nihao="handle">
+    
+    <h3>formData 错误数据</h3>
     <div>{{ formData | json }}<div>
   </script>
 <script src="example.build.js"></script>

@@ -1,6 +1,6 @@
 {
   "name": "vue-v",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "a vue form validator",
   "main": "src/index.js",
   "scripts": {

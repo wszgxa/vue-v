@@ -19,7 +19,7 @@ var list = {
   email: function(str){
       return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
   },
-  strLen: function(str, min, max) {   
+  length: function(str, min, max) {   
     var len;
     if(str.length == undefined){
       throw new Error('type error');
@@ -36,7 +36,7 @@ var list = {
   qq: function(str) {
     return /^[1-9][0-9]{2,9}$/.test(str);
   },
-  cellphone:function(cellPhone){
+  cellphone: function(cellPhone){
     return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
   },
   /**

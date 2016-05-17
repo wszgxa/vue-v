@@ -48,8 +48,8 @@
 	    vueV = __webpack_require__(3);
 
 	Vue.use(vueV,{
-	  nihao: function() {
-	    return true;
+	  nihao: function(str) {
+	    return parseInt(str) === 1;
 	  }
 	});
 
@@ -63,8 +63,18 @@
 	    }
 	  },
 	  methods: {
-	    password: function(tag){
+	    handle: function(tag) {
 	      console.log(tag);
+	    },
+	    alert: function(tag) {
+	      if (tag.length > 0) {
+	        alert(tag.join(','));
+	      }
+	    },
+	    strLen: function(tag) {
+	      if(tag.indexOf("length")) {
+	        alert('字符串长度不符合要求！');
+	      }
 	    }
 	  }
 	});
@@ -10204,7 +10214,7 @@
 	  email: function(str){
 	      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
 	  },
-	  strLen: function(str, min, max) {   
+	  length: function(str, min, max) {   
 	    var len;
 	    if(str.length == undefined){
 	      throw new Error('type error');
@@ -10221,7 +10231,7 @@
 	  qq: function(str) {
 	    return /^[1-9][0-9]{2,9}$/.test(str);
 	  },
-	  cellphone:function(cellPhone){
+	  cellphone: function(cellPhone){
 	    return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
 	  },
 	  /**
