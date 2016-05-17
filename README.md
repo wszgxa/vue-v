@@ -68,16 +68,28 @@ Vue.use(vueV,{
 ### 已经添加的验证方法
 
 chinese: 验证中文
+
 bank：验证16-19位的银行卡号
+
 password: 验证密码
+
 email: 验证邮箱
+
 length: 验证字符长度
+
 qq: QQ号
+
 cellphon: 手机号
+
 telarea: 固定电话区号
+
 telnum: 固定电话号码
+
 idcard：身份证
+
 username: 用户名
+
 required: 是否需要
+
 
 
