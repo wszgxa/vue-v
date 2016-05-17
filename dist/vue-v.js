@@ -1,5 +1,5 @@
 /**
- * vue-v v0.0.1
+ * vue-v v0.1.2
  * https://github.com/wszgxa/vue-v
  * Released under the MIT License.
  */
@@ -64,7 +64,7 @@
 	      _.extend(list, options);
 
 	  Vue.directive('ver', {
-	    prams: ["maxLength","minLength"],
+	    params: ["maxLength","minLength"],
 	    bind: function() {
 	      // if no v-model throw error
 	      if (this.el.getAttribute('v-model') == undefined) {
@@ -74,6 +74,7 @@
 	    update: function(report) {
 	      var vm = this.vm,
 	          el = this.el,
+	          self = this,
 	          vModel = this.el.getAttribute('v-model'),
 	          name = this.el.getAttribute('name'),
 	          va_list = _.getKeys(this.modifiers);
@@ -88,7 +89,7 @@
 	      var setState = function(val){
 	        var tag = {};
 	        va_list.forEach(function(key){
-	          tag[key] = list[key](val);
+	          tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
 	        });
 	        vm.$set('formData.'+name,tag);
 	      };
@@ -153,7 +154,7 @@
 	  email: function(str){
 	      return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
 	  },
-	  strLen: function(str, min, max) {   
+	  length: function(str, min, max) {   
 	    var len;
 	    if(str.length == undefined){
 	      throw new Error('type error');
@@ -161,12 +162,16 @@
 	    } else {
 	      len = str.length;
 	    }
+	    if (min == undefined || max == undefined) {
+	      throw new Error('need min and max!');
+	      return false;
+	    }
 	    return (min<=len)&&(len<=max);
 	  },
 	  qq: function(str) {
 	    return /^[1-9][0-9]{2,9}$/.test(str);
 	  },
-	  cellphone:function(cellPhone){
+	  cellphone: function(cellPhone){
 	    return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
 	  },
 	  /**
@@ -227,6 +232,10 @@
 	  // 类数组对象同样适用
 	  return str == null ? "" : String.prototype.trim.call(str);
 	};
+	_.isPlainObject = function (obj) {
+	    return _.isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+	};
+	_.isArray = Array.isArray;
 	_.getKeys = function(obj) {
 	  var tag = [];
 	  for(var p in obj) {
@@ -239,10 +248,11 @@
 	  }
 	  return tag;
 	};
+
 	_.extend = function (target, source, deep) {
 	    for (key in source)
-	      if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-	        if (isPlainObject(source[key]) && !isPlainObject(target[key])){
+	      if (deep && (_.isPlainObject(source[key]) || isArray(source[key]))) {
+	        if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])){
 	          target[key] = {};
 	        }
 	        if (isArray(source[key]) && !isArray(target[key])){

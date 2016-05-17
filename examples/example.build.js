@@ -10292,6 +10292,10 @@
 	  // 类数组对象同样适用
 	  return str == null ? "" : String.prototype.trim.call(str);
 	};
+	_.isPlainObject = function (obj) {
+	    return _.isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+	};
+	_.isArray = Array.isArray;
 	_.getKeys = function(obj) {
 	  var tag = [];
 	  for(var p in obj) {
@@ -10304,10 +10308,11 @@
 	  }
 	  return tag;
 	};
+
 	_.extend = function (target, source, deep) {
 	    for (key in source)
-	      if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-	        if (isPlainObject(source[key]) && !isPlainObject(target[key])){
+	      if (deep && (_.isPlainObject(source[key]) || isArray(source[key]))) {
+	        if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])){
 	          target[key] = {};
 	        }
 	        if (isArray(source[key]) && !isArray(target[key])){
