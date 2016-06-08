@@ -31,7 +31,7 @@ npm run dev
 
 ### 使用方法
 
-我们会在data里面添加连个对象：
+我们会在data里面添加两个对象：
 
 ``` js
 data: {
@@ -87,7 +87,7 @@ length: 验证字符长度
 
 qq: QQ号
 
-cellphon: 手机号
+cellphone: 手机号
 
 telarea: 固定电话区号
 

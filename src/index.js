@@ -39,7 +39,7 @@ vueV.install = function(Vue, options) {
         va_list.forEach(function(key){
           tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
         });
-        vm.$set('formData.'+name,tag);
+        vm.$set('formData.'+name, tag);
       };
       // 初始化
       setState('');
