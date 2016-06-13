@@ -20,6 +20,7 @@ vueV.install = function(Vue, options) {
       }
     },
     update: function(report) {
+
       var vm = this.vm,
           el = this.el,
           self = this,
@@ -35,8 +36,13 @@ vueV.install = function(Vue, options) {
       }
       // 设置formdata验证数据
       var setState = function(val){
+       
         var tag = {};
         va_list.forEach(function(key){
+          console.log(key);
+         if(typeof list[key] != "function"){
+          throw new Error(''+key+' is not defined')
+         }
           tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
         });
         vm.$set('formData.'+name, tag);
