@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>这个页面会展示当前所有支持的表单验证</title>
+  <style>
+    body {
+      font-size: "微软雅黑";
+
+    }
+    #h3 {
+      font-weight: bold;
+    }
+    #errorTipWrap {
+      color: red;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <li>地址</li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </nav>
+  <div id="demo"></div>
+  <script type="x-template" id="template">
+    <h3>required</h3>
+    <input name="required" v-model="model.required" v-ver.required="handle">
+    <h3>地址</h3>
+    <input name="address" v-model="model.address" v-ver.required="handle">
+    <h3>password</h3>
+    <input name="password" v-model="model.password" v-ver.password="handle">
+
+    <h3>组合使用</h3>
+    <input name="gropu" v-model="model.group" v-ver.password.required="alert">
+    <h3>字符长度</h3>
+    <input name="str" v-model="model.str" v-ver.length="strLen" min-length="12" max-length="22">
+    <h3>添加的验证方法</h3>
+    <input name="test" v-model="model.test" v-ver.nihao="handle">
+    
+    <h3>formData 错误数据</h3>
+    <div id="errorTipWrap">{{ formData | json }}<div>
+  </script>
+  <script src="example.build.js"></script>
+</body>
+</html>
