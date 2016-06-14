@@ -12,7 +12,7 @@ vueV.install = function(Vue, options) {
       _.extend(list, options);
 
   Vue.directive('ver', {
-    params: ["maxLength","minLength"],
+    params: ["maxLength", "minLength"],
     bind: function() {
       // if no v-model throw error
       if (this.el.getAttribute('v-model') == undefined) {
@@ -29,11 +29,11 @@ vueV.install = function(Vue, options) {
       if (name == undefined) {
         throw new Error('input without name');
       }
-      // 如果data没有设置，初始化
+      // if no model data ,set it
       if (vm.model[name] == undefined) {
         vm.$set('model.'+name, this.el.value);
       }
-      // 设置formdata验证数据
+      // set the result on formData
       var setState = function(val){
         var tag = {};
         va_list.forEach(function(key){
@@ -41,9 +41,9 @@ vueV.install = function(Vue, options) {
         });
         vm.$set('formData.'+name, tag);
       };
-      // 初始化
+      // init
       setState('');
-      // 监听
+      // watch the modle change
       vm.$watch(vModel, setState);
 
       Vue.util.on(el, 'blur', function(){
