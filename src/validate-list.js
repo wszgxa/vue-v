@@ -13,21 +13,21 @@ var list = {
   companyname: function (str) {
     return /^(([\u4e00-\u9fff]{2,50})|([a-z\.\s\,\(\)（）]{2,50}))$/i.test(str)
   },
-  chinese: function(str) {
+  chinese: function (str) {
     return /^[\u4e00-\u9fa5]+$/i.test(_.trim(str));
   },
-  bank: function(str){
+  bank: function (str) {
     return /\d{16,19}/.test(str);
   },
-  password: function(str){
+  password: function (str) {
     return /^([0-9a-zA-Z]){6,20}$/.test(str);
   },
-  email: function(str){
+  email: function (str) {
       return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(_.trim(str));
   },
   length: function(str, min, max) {   
     var len;
-    if(str.length == undefined){
+    if (str.length == undefined) {
       throw new Error('type error');
       return false;
     } else {
@@ -37,12 +37,12 @@ var list = {
       throw new Error('need min and max!');
       return false;
     }
-    return (min<=len)&&(len<=max);
+    return (min <= len)&&(len<=max);
   },
-  qq: function(str) {
+  qq: function (str) {
     return /^[1-9][0-9]{2,9}$/.test(str);
   },
-  cellphone: function(cellPhone){
+  cellphone: function (cellPhone){
     return  /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(cellPhone);
   },
   /**
@@ -50,7 +50,7 @@ var list = {
    * @param  String telarea 用户的固定电话的区号
    * @return boolean           格式正确返回true,否则返回false
    */
-  telarea: function(telarea) {
+  telarea: function (telarea) {
     return /^0[0-9]{2,3}$/.test(telarea);
   },
   /**
@@ -58,7 +58,7 @@ var list = {
    * @param  int telnum 用户的固定电话的号码
    * @return boolean           格式正确返回true,否则返回false
    */
-  telnum: function(telnum) {
+  telnum: function (telnum) {
     return  /^[2-9][0-9]{6,7}$/.test(telnum);
   },
   /**
@@ -66,7 +66,7 @@ var list = {
    * @param  string id 身份证号
    * @return boolean    格式正确返回true,否则返回false
    */
-  idcard: function(id) {
+  idcard: function (id) {
     return /^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/.test(id);
   },
   /**
@@ -74,10 +74,10 @@ var list = {
    * @param  string userName 用户名
    * @return boolean 格式正确返回true,否则返回false
    */
-  username: function(userName) {
+  username: function (userName) {
     return /^[\u4e00-\u9fa5]{1,10}[·.]{0,1}[\u4e00-\u9fa5]{1,10}$/.test(userName);
   },
-  required: function(str) {
+  required: function (str) {
     return !!str;
   }
 };
