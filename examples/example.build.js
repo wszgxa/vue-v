@@ -10264,6 +10264,10 @@
 	      var setState = function(val){
 	        var tag = {};
 	        va_list.forEach(function(key){
+	         
+	         if(typeof list[key] != "function"){
+	          throw new Error(''+key+' is not defined')
+	         }
 	          tag[key] = list[key](val, self.params.maxLength, self.params.minLength);
 	        });
 	        vm.$set('formData.'+name, tag);
@@ -10317,8 +10321,11 @@
 
 
 	var list = {
-	  address: function (str) { // str地址文本
-	    return /^[0-9a-zA-Z\u4e00-\u9fa5]{2,25}$/.test(str);
+	  address: function (str) {
+	    return /^[0-9a-zA-Z\u4e00-\u9fa5]{2,25}$/.test(str)
+	  },
+	  companyname: function (str) {
+	    return /^(([\u4e00-\u9fff]{2,50})|([a-z\.\s\,\(\)（）]{2,50}))$/i.test(str)
 	  },
 	  chinese: function(str) {
 	    return /^[\u4e00-\u9fa5]+$/i.test(_.trim(str));

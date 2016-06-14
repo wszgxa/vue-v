@@ -74,6 +74,9 @@ Vue.use(vueV,{
 
 
 ### 已经添加的验证方法
+address: 地址
+
+comparename: 公司名称
 
 chinese: 验证中文
 
