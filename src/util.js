@@ -21,7 +21,7 @@ _.isPlainObject = function (obj) {
 _.isArray = Array.isArray;
 _.getKeys = function(obj) {
   var tag = [];
-  for(var p in obj) {
+  for (var p in obj) {
     // 判断是否是实例属性
     if (obj.hasOwnProperty) {
       obj.hasOwnProperty(p) && tag.push(p);
