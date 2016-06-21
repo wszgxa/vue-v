@@ -60,7 +60,7 @@ vueV.install = function(Vue, options) {
             tag.push(item);
           }
         }
-        report(tag);
+        report(tag, this.el);
       });
 
     },

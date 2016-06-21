@@ -33,7 +33,7 @@ _.getKeys = function(obj) {
 };
 
 _.extend = function (target, source, deep) {
-    for (key in source)
+    for (var key in source)
       if (deep && (_.isPlainObject(source[key]) || isArray(source[key]))) {
         if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])){
           target[key] = {};
