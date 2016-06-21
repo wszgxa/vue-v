@@ -39,7 +39,6 @@ vueV.install = function(Vue, options) {
        
         var tag = {};
         va_list.forEach(function(key){
-          console.log(key);
          if(typeof list[key] != "function"){
           throw new Error(''+key+' is not defined')
          }
